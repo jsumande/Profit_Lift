@@ -6,7 +6,7 @@ import AppBar from '../../component/AppBar/AppBar'
 import ModalContent from '../../component/modal/ModalContent';
 import CustomButton from '../../component/button/CustomButton';
 import LoadingModal from '../../component/modal/LoadingModal';
-
+import TopUp  from "../../api";
 const Wallet = () => {
 
     const [ balance , setBalance ] = useState(10) 
@@ -22,6 +22,16 @@ const Wallet = () => {
         if ( data  ===  priceRange ) return setPriceRange(null)
         setPriceRange( data );
     }
+
+    
+  const handleSubmit = async () => {
+    try {
+      const response = await TopUp(priceRange);
+      handlePricingProcess();
+    } catch (error) {
+      Alert("Opss...",  error , "error",)
+    }
+  };
 
     const handlePricingProcess = () => {
 
@@ -83,7 +93,7 @@ const Wallet = () => {
 
                 </div>
         
-                <CustomButton isDisable={ priceRange ? false : true } customFunction={handlePricingProcess}>
+                <CustomButton isDisable={ priceRange ? false : true } customFunction={handleSubmit}>
                     <span className='text-xl font-small text-white'>Proceed</span>
                 </CustomButton>
 
