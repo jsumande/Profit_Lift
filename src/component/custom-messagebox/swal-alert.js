@@ -6,3 +6,5 @@ export async function Alert(title, textMsg, icon) {
         text: textMsg,
     });
 }
+
+export default Alert

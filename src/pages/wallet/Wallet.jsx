@@ -7,6 +7,7 @@ import ModalContent from '../../component/modal/ModalContent';
 import CustomButton from '../../component/button/CustomButton';
 import LoadingModal from '../../component/modal/LoadingModal';
 import { TopUp }  from "../../api";
+import { Alert } from "../../component/custom-messagebox/swal-alert";
 const Wallet = () => {
 
     const [ balance , setBalance ] = useState(10) 
