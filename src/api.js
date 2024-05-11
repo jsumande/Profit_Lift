@@ -96,3 +96,10 @@ export async function SingIn(email, password) {
       throw error; 
     }
   }
+
+  export default {
+    SingIn,
+    Invite,
+    Register,
+    TopUp
+  };
