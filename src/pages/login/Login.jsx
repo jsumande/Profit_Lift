@@ -39,7 +39,10 @@ const Login = () => {
   const handleSubmit = async () => {
     try {
       const response = await SingIn(email, confirmPassword);
-      //handleNavigate();
+      if(!response.accessToken){
+        handleNavigate();
+      }
+     
     } catch (error) {
       Alert("Opss...",  error , "error",)
     }
