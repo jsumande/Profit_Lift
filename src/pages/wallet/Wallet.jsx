@@ -6,7 +6,7 @@ import AppBar from '../../component/AppBar/AppBar'
 import ModalContent from '../../component/modal/ModalContent';
 import CustomButton from '../../component/button/CustomButton';
 import LoadingModal from '../../component/modal/LoadingModal';
-import TopUp  from "../../api";
+import { TopUp }  from "../../api";
 const Wallet = () => {
 
     const [ balance , setBalance ] = useState(10) 
