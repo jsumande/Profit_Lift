@@ -37,6 +37,7 @@ const InvitePage = () => {
           // Handle successful Invite response
           // Redirect user to another page or do something else
           //handleNavigate();
+          console.log(response)
         } catch (error) {
           Alert("Opss...",  error , "error",)
         }

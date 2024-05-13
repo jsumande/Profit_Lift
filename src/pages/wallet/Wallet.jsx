@@ -27,7 +27,22 @@ const Wallet = () => {
     
   const handleSubmit = async () => {
     try {
-      const response = await TopUp(priceRange);
+        let topup = 0;
+        switch (priceRange) {
+            case 1:
+                topup =   50 
+              break;
+            case 2:
+                topup =   100 
+              break;
+            case 3:
+                topup =   250 
+              break;
+            default:
+                topup =   500 
+        }
+      const response = await TopUp(topup);
+      console.log(response)
       handlePricingProcess();
     } catch (error) {
       Alert("Opss...",  error , "error",)
