@@ -39,8 +39,12 @@ const Login = () => {
   const handleSubmit = async () => {
     try {
       const response = await SingIn(email, confirmPassword);
-      if(!response.accessToken){
+      if(response.accessToken){
+        localStorage.setItem("access_token", response.accessToken);
+        console.log(response.accessToken)
         handleNavigate();
+      }else{
+        Alert("Error",  "Invalid username or password" , "error",)
       }
      
     } catch (error) {
