@@ -6,11 +6,11 @@ import AppBar from '../../component/AppBar/AppBar'
 import ModalContent from '../../component/modal/ModalContent';
 import CustomButton from '../../component/button/CustomButton';
 import LoadingModal from '../../component/modal/LoadingModal';
-import { TopUp }  from "../../api";
+import { TopUp, GetAvailableBalance}  from "../../api";
 import { Alert } from "../../component/custom-messagebox/swal-alert";
 const Wallet = () => {
 
-    const [ balance , setBalance ] = useState(10) 
+    const [ balance , setBalance ] = useState(0) 
 
     const [ isModal , setIsModal ] = useState(false)
 
@@ -23,7 +23,18 @@ const Wallet = () => {
         if ( data  ===  priceRange ) return setPriceRange(null)
         setPriceRange( data );
     }
+    useEffect(() => {
 
+      const fetchData = async () => {
+        const response = await GetAvailableBalance();
+        setBalance(response.topup.amount)
+      };
+
+      fetchData();
+     
+    }, []);
+
+    
     
   const handleSubmit = async () => {
     try {
@@ -42,38 +53,20 @@ const Wallet = () => {
                 topup =   500 
         }
       const response = await TopUp(topup);
-      console.log(response)
       handlePricingProcess();
     } catch (error) {
       Alert("Opss...",  error , "error",)
     }
   };
 
-    const handlePricingProcess = () => {
-
+    const handlePricingProcess =  async () => {
+      const response = await GetAvailableBalance();
         setIsModal(false);
         setIsModalLoadingScreen(true)
+        setBalance(response.topup.amount)
         setTimeout(() => {
             setIsModalLoadingScreen(false)
-
-            switch (priceRange) {
-                case 1:
-                    setBalance( balance + 50 )
-                  break;
-                case 2:
-                    setBalance( balance + 100 )
-                  break;
-                case 3:
-                    setBalance( balance + 250 )
-                  break;
-                default:
-                    setBalance( balance + 500 )
-            }
-
-            setPriceRange(null)
-            
         }, 1500);
-
     }
 
   return (

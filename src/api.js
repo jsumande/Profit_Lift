@@ -87,8 +87,29 @@ export async function SingIn(email, password) {
         body: JSON.stringify(requestBody),
       };
   
-      const response = await fetch('https://exam-jay.onrender.com/api/topups', requestOptions);
+      const response = await fetch('https://exam-jay.onrender.com/api/topups/2', requestOptions);
       const data = await response.json();
+      
+      return data;
+    } catch (error) {
+     
+      throw error; 
+    }
+  }
+
+  export async function GetAvailableBalance() {
+    try {
+  
+      const requestOptions = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+  
+      const response = await fetch('https://exam-jay.onrender.com/api/topups/2', requestOptions);
+      const data = await response.json();
+     
       
       return data;
     } catch (error) {
@@ -101,5 +122,6 @@ export async function SingIn(email, password) {
     SingIn,
     Invite,
     Register,
-    TopUp
+    TopUp,
+    GetAvailableBalance
   };
